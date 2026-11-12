@@ -127,9 +127,20 @@ button {
 
 .hero-pattern {
   background-image:
-    radial-gradient(ellipse at 15% 20%, #ead8c7 0, transparent 30%),
-    radial-gradient(ellipse at 85% 25%, #dce5d9 0, transparent 28%),
-    linear-gradient(135deg, #f7f1e7, #f2e8dc 55%, #f7f1e7);
+    radial-gradient(ellipse at 14% 18%, rgba(229, 154, 56, 0.22) 0, transparent 34%),
+    radial-gradient(ellipse at 86% 24%, rgba(185, 140, 145, 0.22) 0, transparent 32%),
+    radial-gradient(ellipse at 50% 82%, rgba(220, 229, 217, 0.5) 0, transparent 42%),
+    linear-gradient(135deg, #f7f1e7, #f3e6d7 55%, #f7f1e7);
+}
+
+.shiv-frame {
+  padding: 10px;
+  border: 1px solid #d8c29b;
+  border-radius: 170px 170px 24px 24px;
+  background: linear-gradient(160deg, #fffdf8, #f7ecdc);
+  box-shadow:
+    0 22px 60px rgba(73, 55, 53, 0.12),
+    0 0 0 6px rgba(216, 194, 155, 0.16);
 }
 
 .photo-frame {

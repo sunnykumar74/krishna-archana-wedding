@@ -118,7 +118,8 @@ export const CONTENT = {
       { label: "RSVP", href: "#rsvp" },
     ],
     envelope: {
-      eyebrow: "प्रेम एवं परिवार का पावन उत्सव",
+      invocation: "॥ ॐ नमः शिवाय · श्री गणेशाय नमः ॥",
+      eyebrow: "महादेव एवं पार्वती मैया के पावन आशीर्वाद से",
       groomName: "कृष्णा राज",
       brideName: "कुमारी अर्चना",
       subtextLine1: "आप सपरिवार सादर आमंत्रित हैं",
@@ -128,7 +129,7 @@ export const CONTENT = {
     },
     hero: {
       eyebrow: "परम पिता परमेश्वर की असीम कृपा से",
-      invocation: "॥ श्री गणेशाय नमः ॥",
+      invocation: "॥ ॐ नमः शिवाय · श्री गणेशाय नमः ॥",
       shlokaLine1: "सर्व मंगल मांगल्ये, शिवे सर्वार्थ साधिके।",
       shlokaLine2: "शरण्ये त्रयम्बके गौरी, नारायणी नमोऽस्तुते ॥",
       groomShort: "कृष्णा राज",
@@ -138,6 +139,16 @@ export const CONTENT = {
       dateLine: "30 नवंबर 2026 · सोमवार",
       cta: "मांगलिक कार्यक्रम देखें",
       scrollCue: "नीचे स्क्रॉल करें",
+    },
+    divineBlessing: {
+      eyebrow: "हर हर महादेव · जय माता पार्वती",
+      heading: "महादेव एवं पार्वती मैया का पावन आशीर्वाद",
+      subtitle: "शिव-गौरी की कृपा से सजा शुभ परिणय",
+      verseLine1: "शिव-पार्वती के पावन बंधन सा अटूट रहे यह स्नेह और विश्वास,",
+      verseLine2: "महादेव और पार्वती मैया की कृपा से जीवन में सदा रहे आनंद और प्रकाश।",
+      mantraBadge: "ॐ नमः शिवाय · गौरी-शंकर नमोऽस्तुते",
+      flowerBurstBtn: "पुष्प वर्षा करें",
+      imageAlt: "भगवान शिव (महादेव) एवं माता पार्वती का पावन विवाह आशीर्वाद",
     },
     countdown: {
       eyebrow: "शुभ घड़ी की प्रतीक्षा",
@@ -247,6 +258,8 @@ export const CONTENT = {
       copied: "आमंत्रण लिंक कॉपी हो गया!",
       musicMissing:
         "संगीत फ़ाइल नहीं मिली — पहले public/music/wedding-music.mp3 फ़ाइल जोड़ें।",
+      flowerShower:
+        "महादेव एवं पार्वती मैया के आशीर्वाद से पुष्प वर्षा!",
     },
     footer: {
       couple: "कृष्णा राज एवं कुमारी अर्चना",
@@ -284,7 +297,8 @@ export const CONTENT = {
       { label: "RSVP", href: "#rsvp" },
     ],
     envelope: {
-      eyebrow: "A Celebration of Love & Family",
+      invocation: "॥ Om Namah Shivaya · Shri Ganeshaya Namah ॥",
+      eyebrow: "With the Divine Blessings of Mahadev & Parvati Maiya",
       groomName: "Krishna Raj",
       brideName: "Kumari Archana",
       subtextLine1: "You and your family are cordially invited",
@@ -294,7 +308,7 @@ export const CONTENT = {
     },
     hero: {
       eyebrow: "With the Infinite Grace of the Almighty",
-      invocation: "॥ Shri Ganeshaya Namah ॥",
+      invocation: "॥ Om Namah Shivaya · Shri Ganeshaya Namah ॥",
       shlokaLine1: "Sarva Mangala Mangalye, Shive Sarvartha Sadhike,",
       shlokaLine2: "Sharanye Tryambake Gauri, Narayani Namostute.",
       groomShort: "Krishna Raj",
@@ -305,6 +319,18 @@ export const CONTENT = {
       dateLine: "30 November 2026 · Monday",
       cta: "Explore Events",
       scrollCue: "Scroll to explore",
+    },
+    divineBlessing: {
+      eyebrow: "Har Har Mahadev · Jai Mata Parvati",
+      heading: "Sacred Blessings of Mahadev & Parvati Maiya",
+      subtitle: "An eternal bond blessed by Shiv & Gauri",
+      verseLine1:
+        "Like the sacred, timeless union of Lord Shiva and Goddess Parvati,",
+      verseLine2:
+        "May their divine grace fill this marriage with peace, love, and eternal light.",
+      mantraBadge: "Om Namah Shivaya · Gauri-Shankar Namostute",
+      flowerBurstBtn: "Shower Flowers",
+      imageAlt: "Sacred Shiv-Parvati Vivah Blessing Illustration",
     },
     countdown: {
       eyebrow: "Counting the Moments",
@@ -415,6 +441,8 @@ export const CONTENT = {
       copied: "Invitation link copied to clipboard!",
       musicMissing:
         "Audio file not found — add public/music/wedding-music.mp3 first.",
+      flowerShower:
+        "Showering 2D flowers with Mahadev & Parvati Maiya's blessings!",
     },
     footer: {
       couple: "Krishna Raj & Kumari Archana",

@@ -31,10 +31,18 @@ import Countdown from "./components/Countdown";
 import CouplePhoto from "./components/CouplePhoto";
 import GalleryLightbox from "./components/GalleryLightbox";
 import AdminModal from "./components/AdminModal";
+import FlowerShower2D from "./components/FlowerShower2D";
+import {
+  FloralToran2D,
+  LotusDivider2D,
+  ShivTrishulCrest,
+} from "./components/ShivParvatiMotifs";
 
 function App() {
   const [opened, setOpened] = useState(false);
   const [musicOn, setMusicOn] = useState(false);
+  const [flowersEnabled, setFlowersEnabled] = useState(true);
+  const [flowerBurstKey, setFlowerBurstKey] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [lang, setLang] = useState("hi");
   const [rsvpState, setRsvpState] = useState({
@@ -132,6 +140,8 @@ function App() {
 
   const handleOpenInvitation = () => {
     setOpened(true);
+    setFlowersEnabled(true);
+    setFlowerBurstKey((k) => k + 1);
     const audio = audioRef.current;
     if (audio && !userMutedRef.current) {
       audio
@@ -139,6 +149,12 @@ function App() {
         .then(() => setMusicOn(true))
         .catch(() => {});
     }
+  };
+
+  const triggerFlowerShower = () => {
+    setFlowersEnabled(true);
+    setFlowerBurstKey((k) => k + 1);
+    showToast(t.toasts.flowerShower);
   };
 
   const toggleMusic = async () => {
@@ -215,6 +231,8 @@ function App() {
         onPause={() => setMusicOn(false)}
       />
 
+      <FlowerShower2D enabled={flowersEnabled} burstKey={flowerBurstKey} />
+
       <AnimatePresence>
         {toastMsg && (
           <motion.div
@@ -245,11 +263,10 @@ function App() {
               transition={{ duration: 0.6 }}
               className="relative z-10 text-center max-w-lg px-2"
             >
-              <Flower2
-                className="mx-auto text-rose mb-5"
-                size={34}
-                strokeWidth={1}
-              />
+              <ShivTrishulCrest className="w-28 h-20 mx-auto mb-2" />
+              <p className="font-hindi text-rose text-xs sm:text-sm tracking-[.18em] mb-2">
+                {t.envelope.invocation}
+              </p>
               <p className="eyebrow">{t.envelope.eyebrow}</p>
               <div className="my-8">
                 <div className="font-serif text-4xl sm:text-6xl leading-tight">
@@ -296,6 +313,15 @@ function App() {
             ))}
           </nav>
           <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={triggerFlowerShower}
+              className="icon-button"
+              aria-label={t.divineBlessing.flowerBurstBtn}
+              title={t.divineBlessing.flowerBurstBtn}
+            >
+              <Flower2 size={17} className="text-rose" />
+            </button>
             <button
               type="button"
               data-music-toggle="true"
@@ -349,16 +375,17 @@ function App() {
       </header>
 
       <main id="home">
-        <section className="relative min-h-[690px] flex items-center justify-center text-center px-5 py-24 hero-pattern">
+        <section className="relative min-h-[690px] flex flex-col items-center justify-center text-center px-5 pt-8 pb-24 hero-pattern">
           <div className="absolute inset-0 bg-gradient-to-b from-ivory/20 via-ivory/45 to-ivory" />
-          <div className="relative max-w-4xl mx-auto">
+          <div className="relative z-10 w-full max-w-4xl mx-auto">
+            <FloralToran2D />
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
               <p className="eyebrow mb-4">{t.hero.eyebrow}</p>
-              <p className="font-hindi text-rose tracking-[.22em] text-sm mb-3">
+              <p className="font-hindi text-rose tracking-[.2em] text-sm mb-3">
                 {t.hero.invocation}
               </p>
               <p className="font-hindi text-xs sm:text-sm text-ink/60 leading-6 mb-7 max-w-xl mx-auto">
@@ -372,9 +399,7 @@ function App() {
                 <br />
                 {t.hero.brideShort}
               </h1>
-              <div className="ornament my-8">
-                <span>✦</span>
-              </div>
+              <LotusDivider2D />
               <p className="font-hindi text-base sm:text-xl leading-9 text-ink/75 max-w-2xl mx-auto">
                 {t.hero.inviteLine1}
                 <br className="hidden sm:inline" /> {t.hero.inviteLine2}
@@ -391,6 +416,60 @@ function App() {
           <span className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] tracking-[.3em] text-ink/40 uppercase whitespace-nowrap">
             {t.hero.scrollCue}
           </span>
+        </section>
+
+        <section className="section-wrap bg-white/55 border-y border-champagne/30">
+          <div className="max-w-5xl mx-auto grid md:grid-cols-[0.95fr_1.05fr] gap-10 items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="relative mx-auto w-full max-w-[340px]"
+            >
+              <div className="shiv-frame">
+                <img
+                  src={assetUrl("images/mahadev-parvati.jpg")}
+                  alt={t.divineBlessing.imageAlt}
+                  className="w-full h-auto object-cover rounded-[160px_160px_18px_18px]"
+                />
+              </div>
+              <div className="mt-4 text-center">
+                <span className="inline-block px-4 py-1.5 rounded-full bg-ivory border border-champagne/80 text-[11px] font-hindi tracking-wider text-ink/80">
+                  {t.divineBlessing.mantraBadge}
+                </span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center md:text-left"
+            >
+              <ShivTrishulCrest className="w-20 h-14 mx-auto md:mx-0 mb-2" />
+              <p className="eyebrow">{t.divineBlessing.eyebrow}</p>
+              <h2 className="section-title mt-3 leading-tight">
+                {t.divineBlessing.heading}
+              </h2>
+              <p className="font-hindi text-rose text-sm sm:text-base mt-3">
+                {t.divineBlessing.subtitle}
+              </p>
+              <p className="font-hindi text-ink/75 text-base sm:text-lg leading-9 mt-6">
+                {t.divineBlessing.verseLine1}
+                <br />
+                {t.divineBlessing.verseLine2}
+              </p>
+              <div className="mt-7 flex flex-wrap justify-center md:justify-start gap-3">
+                <button
+                  type="button"
+                  onClick={triggerFlowerShower}
+                  className="gold-button"
+                >
+                  <Flower2 size={16} /> {t.divineBlessing.flowerBurstBtn}
+                </button>
+              </div>
+            </motion.div>
+          </div>
         </section>
 
         <section className="section-wrap text-center">
