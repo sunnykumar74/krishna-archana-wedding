@@ -52,6 +52,7 @@ function App() {
   const [toastMsg, setToastMsg] = useState("");
   const audioRef = useRef(null);
   const toastTimerRef = useRef(null);
+  const userMutedRef = useRef(false);
 
   const t = CONTENT[lang];
   const inviteUrl = typeof window !== "undefined" ? window.location.href : "";
@@ -71,6 +72,37 @@ function App() {
   useEffect(() => {
     return () => {
       if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return undefined;
+
+    const tryAutoPlay = () => {
+      if (userMutedRef.current || !audio.paused) return;
+      audio
+        .play()
+        .then(() => setMusicOn(true))
+        .catch(() => {});
+    };
+
+    tryAutoPlay();
+
+    const onFirstInteraction = (e) => {
+      if (e.target instanceof Element && e.target.closest("[data-music-toggle]")) {
+        return;
+      }
+      tryAutoPlay();
+      window.removeEventListener("pointerdown", onFirstInteraction);
+      window.removeEventListener("keydown", onFirstInteraction);
+    };
+
+    window.addEventListener("pointerdown", onFirstInteraction, { passive: true });
+    window.addEventListener("keydown", onFirstInteraction);
+    return () => {
+      window.removeEventListener("pointerdown", onFirstInteraction);
+      window.removeEventListener("keydown", onFirstInteraction);
     };
   }, []);
 
@@ -98,13 +130,26 @@ function App() {
     );
   };
 
+  const handleOpenInvitation = () => {
+    setOpened(true);
+    const audio = audioRef.current;
+    if (audio && !userMutedRef.current) {
+      audio
+        .play()
+        .then(() => setMusicOn(true))
+        .catch(() => {});
+    }
+  };
+
   const toggleMusic = async () => {
     const audio = audioRef.current;
     if (!audio) return;
-    if (musicOn) {
+    if (!audio.paused) {
+      userMutedRef.current = true;
       audio.pause();
       setMusicOn(false);
     } else {
+      userMutedRef.current = false;
       try {
         await audio.play();
         setMusicOn(true);
@@ -165,7 +210,8 @@ function App() {
         id="wedding-audio"
         src={assetUrl("music/wedding-music.mp3")}
         loop
-        preload="none"
+        preload="auto"
+        onPlay={() => setMusicOn(true)}
         onPause={() => setMusicOn(false)}
       />
 
@@ -221,7 +267,7 @@ function App() {
               </p>
               <button
                 type="button"
-                onClick={() => setOpened(true)}
+                onClick={handleOpenInvitation}
                 className="gold-button mt-8"
               >
                 {t.envelope.openBtn} <ArrowUpRight size={16} />
@@ -252,6 +298,7 @@ function App() {
           <div className="flex items-center gap-2">
             <button
               type="button"
+              data-music-toggle="true"
               onClick={toggleMusic}
               className="icon-button"
               aria-label={musicOn ? "Pause music" : "Play music"}
