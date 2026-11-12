@@ -20,6 +20,10 @@ import {
 } from "lucide-react";
 import { hasSupabaseConfig, supabase } from "./lib/supabase";
 import {
+  hasGoogleSheetsConfig,
+  submitRsvpToGoogleSheets,
+} from "./lib/googleSheets";
+import {
   assetUrl,
   CONTACT_PHONE,
   CONTENT,
@@ -196,11 +200,19 @@ function App() {
     };
 
     try {
-      if (!hasSupabaseConfig || !supabase) {
+      if (!hasGoogleSheetsConfig && (!hasSupabaseConfig || !supabase)) {
         throw new Error(t.rsvp.missingDbError);
       }
-      const { error } = await supabase.from("rsvps").insert(payload);
-      if (error) throw error;
+
+      if (hasGoogleSheetsConfig) {
+        await submitRsvpToGoogleSheets(payload);
+      }
+
+      if (hasSupabaseConfig && supabase) {
+        const { error } = await supabase.from("rsvps").insert(payload);
+        if (error) throw error;
+      }
+
       setRsvpMessage({ type: "success", text: t.rsvp.successMsg });
       setRsvpState({
         name: "",
@@ -780,7 +792,7 @@ function App() {
                   {rsvpMessage.text}
                 </p>
               )}
-              {!hasSupabaseConfig && (
+              {!hasGoogleSheetsConfig && !hasSupabaseConfig && (
                 <p className="sm:col-span-2 text-center text-xs text-ink/50">
                   {t.rsvp.setupNote}
                 </p>

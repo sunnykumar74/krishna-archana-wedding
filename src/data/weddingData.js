@@ -221,10 +221,11 @@ export const CONTENT = {
       submitBusy: "भेजा जा रहा है...",
       successMsg: "धन्यवाद! आपका जवाब सफलतापूर्वक दर्ज हो गया है।",
       missingDbError:
-        "RSVP डेटाबेस अभी कनेक्ट नहीं है। कृपया नीचे दिए गए नंबर पर संपर्क करें या README के अनुसार Supabase सेट करें।",
+        "RSVP Google Sheet वेबहुक अभी कनेक्ट नहीं है। कृपया google-apps-script/Code.gs डिप्लॉय करके VITE_GSHEETS_WEBHOOK_URL जोड़ें या नीचे दिए गए नंबर पर संपर्क करें।",
       genericError: "RSVP भेजने में समस्या हुई। कृपया दोबारा प्रयास करें।",
       invalidPhone: "कृपया मान्य मोबाइल नंबर (8 से 16 अंक) दर्ज करें।",
-      setupNote: "RSVP सेव करने के लिए .env में Supabase सेटअप आवश्यक है।",
+      setupNote:
+        "RSVP को Google Sheet में सेव करने के लिए Google Apps Script Web App URL (VITE_GSHEETS_WEBHOOK_URL) सेटअप आवश्यक है।",
     },
     blessings: {
       eyebrow: "स्नेह, आकांक्षा एवं बाल आग्रह",
@@ -403,10 +404,11 @@ export const CONTENT = {
       submitBusy: "Submitting...",
       successMsg: "Thank you! Your RSVP has been recorded.",
       missingDbError:
-        "RSVP database is not configured yet. Please contact the family number below or configure Supabase via README.",
+        "Google Sheets RSVP webhook is not configured yet. Deploy google-apps-script/Code.gs and set VITE_GSHEETS_WEBHOOK_URL, or call the family number below.",
       genericError: "Could not submit RSVP. Please try again.",
       invalidPhone: "Please enter a valid mobile number (8 to 16 characters).",
-      setupNote: "Supabase configuration in .env is required to store RSVPs.",
+      setupNote:
+        "Google Apps Script Web App URL (VITE_GSHEETS_WEBHOOK_URL) is required to save RSVPs to your Google Sheet.",
     },
     blessings: {
       eyebrow: "With Love & Blessings",

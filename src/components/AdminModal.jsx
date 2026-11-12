@@ -1,6 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
-import { Download, LockKeyhole, LogOut, RefreshCw, X } from "lucide-react";
+import {
+  Download,
+  ExternalLink,
+  LockKeyhole,
+  LogOut,
+  RefreshCw,
+  X,
+} from "lucide-react";
 import { hasSupabaseConfig, supabase } from "../lib/supabase";
+import { GOOGLE_SHEET_URL } from "../lib/googleSheets";
 
 export default function AdminModal({ open, onClose, t }) {
   const [adminEmail, setAdminEmail] = useState("");
@@ -127,19 +135,29 @@ export default function AdminModal({ open, onClose, t }) {
         onClick={(e) => e.stopPropagation()}
         className="max-w-5xl mx-auto my-8 bg-ivory rounded-3xl p-5 sm:p-8 shadow-2xl border border-champagne/40"
       >
-        <div className="flex justify-between items-center">
+        <div className="flex flex-wrap justify-between items-center gap-3">
           <div>
             <p className="eyebrow">{t.eyebrow}</p>
             <h2 className="font-serif text-3xl mt-1">{t.title}</h2>
           </div>
-          <button
-            type="button"
-            onClick={onClose}
-            className="icon-button"
-            aria-label="Close admin panel"
-          >
-            <X size={18} />
-          </button>
+          <div className="flex items-center gap-2">
+            <a
+              href={GOOGLE_SHEET_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="outline-button"
+            >
+              <ExternalLink size={14} /> Google Sheet
+            </a>
+            <button
+              type="button"
+              onClick={onClose}
+              className="icon-button"
+              aria-label="Close admin panel"
+            >
+              <X size={18} />
+            </button>
+          </div>
         </div>
 
         {!adminUser ? (

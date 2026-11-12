@@ -15,7 +15,18 @@ npm run dev
 ```
 Open the local URL printed by Vite (usually `http://localhost:5173`).
 
-## 3. Connect Supabase
+## 3. Connect Google Sheets RSVP (Recommended)
+1. Open your Google Sheet:
+   `https://docs.google.com/spreadsheets/d/1AlQJGqD7ACIrh-ygRWCxltOtVeNmEdhzucLWW04KWWI/edit`
+2. Click **Extensions > Apps Script**.
+3. Replace the editor code with the contents of `google-apps-script/Code.gs` and save.
+4. Click **Deploy > New deployment > Select type: Web app**:
+   - **Execute as:** Me
+   - **Who has access:** Anyone
+5. Click **Deploy**, authorize the script, and copy the **Web app URL** (ending in `/exec`).
+6. Set `VITE_GSHEETS_WEBHOOK_URL` in `.env` (for local) and in GitHub Repo **Settings > Secrets and variables > Actions > Variables** (for GitHub Pages live builds).
+
+## 3B. Connect Supabase (Optional)
 1. Create a project at https://supabase.com/
 2. Open **Project Settings > API**.
 3. Copy Project URL and `anon` / public key into `.env`:
